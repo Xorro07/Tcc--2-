@@ -1,66 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minhas Mesas</title>
+  <title>Comanda Eletrônica</title>
   <link rel="stylesheet" href="mesas.css">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="navbar-brand">
-      <h1>Minhas Mesas</h1>
-    </div>
-    <ul class="navbar-nav">
-      <li class="nav-item"><a href="#" class="nav-link">Mesas</a></li>
-      <li class="nav-item"><a href="adicionar-produto.html" class="nav-link">Adicionar Produto</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Selecionar Cliente</a></li>
-    </ul>
-  </nav>
-
-  <div class="container">
-    <div class="tables-container">
-      <div class="table">
-        <h2 class="table-title">Mesa 1</h2>
-        <ul class="table-list" id="table-1-list">
-          <li>Produto 1</li>
-          <li>Produto 2</li>
-        </ul>
+  <header>
+    <h1>Comanda Eletrônica</h1>
+  </header>
+  <main>
+    <section id="clientes">
+      <h2>Clientes</h2>
+      <label for="cliente-select">Selecione o Cliente:</label>
+      <select id="cliente-select">
+        <option value="cliente1">Cliente 1</option>
+        <option value="cliente2">Cliente 2</option>
+        <!-- Adicione mais opções de clientes aqui -->
+      </select>
+    </section>
+    <section id="produtos">
+      <h2>Produtos</h2>
+      <ul>
+        <li>
+          <span>Produto 1</span>
+          <span>R$ 10,00</span>
+          <input type="number" class="quantity-input" value="1" min="1">
+          <button class="add-btn" data-product="Produto 1" data-price="10.00">Adicionar</button>
+        </li>
+        <li>
+          <span>Produto 2</span>
+          <span>R$ 15,00</span>
+          <input type="number" class="quantity-input" value="1" min="1">
+          <button class="add-btn" data-product="Produto 2" data-price="15.00">Adicionar</button>
+        </li>
+        <!-- Adicione mais produtos aqui -->
+      </ul>
+    </section>
+    <section id="comanda">
+      <h2>Comanda</h2>
+      <table id="comanda-table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Subtotal</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="comanda-list">
+          <!-- Lista de itens adicionados à comanda -->
+        </tbody>
+      </table>
+      <div id="total">
+        <span>Total:</span>
+        <span id="total-value">R$ 0,00</span>
       </div>
-
-      <div class="table">
-        <h2 class="table-title">Mesa 2</h2>
-        <ul class="table-list" id="table-2-list">
-          <li>Produto 3</li>
-          <li>Produto 4</li>
-          <li>Produto 5</li>
-        </ul>
+      <div id="discount">
+        <label for="discount-input">Desconto (%):</label>
+        <input type="number" id="discount-input" value="0" min="0">
+        <button id="apply-discount-btn">Aplicar Desconto</button>
       </div>
-
-      <div class="table">
-        <h2 class="table-title">Mesa 3</h2>
-        <ul class="table-list" id="table-3-list">
-          <li>Produto 6</li>
-        </ul>
+      <div id="final-total">
+        <span>Total com Desconto:</span>
+        <span id="final-total-value">R$ 0,00</span>
       </div>
-    </div>
-
-    <div class="add-remove-buttons">
-      <button onclick="addTable()">Adicionar Mesa</button>
-      <button onclick="removeTable()">Remover Mesa</button>
-    </div>
-  </div>
-
-  <div id="add-product-modal" class="add-product-modal">
-    <div class="add-product-modal-content">
-      <h2 class="add-product-modal-title">Adicionar Produto</h2>
-      <input type="text" id="product-name-input" class="add-product-modal-input" placeholder="Nome do produto">
-      <input type="button" value="Adicionar" class="button" onclick="addProductToTable()">
-      <input type="button" value="Fechar" class="button" onclick="closeAddProductModal()">
-    </div>
-  </div>
-
- 
+    </section>
+  </main>
   <script src="mesas.js"></script>
 </body>
 </html>

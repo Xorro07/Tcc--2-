@@ -1,192 +1,132 @@
-/* Estilos gerais */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  h2 {
-    margin: 0;
-  }
-  
-  /* Estilos do navbar */
-  .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-brand {
-    font-size: 20px;
-  }
-  
-  .navbar-nav {
-    list-style: none;
-    display: flex;
-  }
-  
-  .nav-item {
-    margin-left: 10px;
-  }
-  
-  .nav-link {
-    text-decoration: none;
-    color: #fff;
-  }
-  
-  /* Estilos do container das mesas */
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  
-  /* Estilos das mesas */
-  .tables-container {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .table {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f7f7f7;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .table:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .table-title {
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-  }
-  
-  .table-list {
-    padding: 10px;
-    list-style: none;
-  }
-  
-  /* Estilos dos botões de adicionar/remover mesa */
-  .add-remove-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .add-button,
-  .remove-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .add-button:hover,
-  .remove-button:hover {
-    background-color: #555;
-  }
-  
-  /* Estilos do modal de adicionar produto */
-  .add-product-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .add-product-modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .add-product-modal-title {
-    margin-bottom: 10px;
-  }
-  
-  .add-product-modal-input {
-    margin-bottom: 10px;
-    padding: 5px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  /* Estilos do modal de selecionar cliente */
-  .select-client-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .select-client-modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .select-client-modal-title {
-    margin-bottom: 10px;
-  }
-  
-  .select-client-modal-input {
-    margin-bottom: 10px;
-    padding: 5px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  /* Estilos dos ícones */
-  .fa-plus,
-  .fa-minus {
-    margin-right: 5px;
-  }
-  .add-button, .remove-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .add-button:hover, .remove-button:hover {
-    background-color: #45a049;
-  }
-  
-  .add-button i, .remove-button i {
-    margin-right: 5px;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-  
-  
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+section {
+  flex: 1;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+select, button, .quantity-input, #discount-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.add-btn, .remove-btn {
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.add-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.add-btn:hover {
+  background-color: #0056b3;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+}
+
+.remove-btn:hover {
+  background-color: #bd2130;
+}
+
+#comanda-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+#discount, #final-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-weight: bold;
+  border-top: 1px solid #ccc;
+}
+
+#apply-discount-btn {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#apply-discount-btn:hover {
+  background-color: #0056b3;
+}

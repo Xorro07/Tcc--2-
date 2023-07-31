@@ -1,108 +1,69 @@
-// Código JavaScript para buscar dados das mesas no banco de dados e exibir na página
+document.addEventListener("DOMContentLoaded", () => {
+  const comandaTable = document.getElementById("comanda-table");
+  const addButtons = document.getElementsByClassName("add-btn");
+  const totalValue = document.getElementById("total-value");
+  const finalTotalValue = document.getElementById("final-total-value");
+  const discountInput = document.getElementById("discount-input");
+  const applyDiscountBtn = document.getElementById("apply-discount-btn");
+  let total = 0;
 
-// Simulação de dados do banco de dados
-let mesasData = [
-    { mesa: 1, produtos: ['Produto 1', 'Produto 2'] },
-    { mesa: 2, produtos: ['Produto 3', 'Produto 4', 'Produto 5'] },
-    { mesa: 3, produtos: ['Produto 6'] }
-  ];
-  
-  // Função para exibir dados das mesas na página
-  function displayMesasData() {
-    const table1List = document.getElementById('table-1-list');
-    const table2List = document.getElementById('table-2-list');
-    const table3List = document.getElementById('table-3-list');
-  
-    mesasData.forEach((mesaData) => {
-      const listItem = document.createElement('li');
-      listItem.textContent = mesaData.produtos.join(', ');
-  
-      switch (mesaData.mesa) {
-        case 1:
-          table1List.appendChild(listItem);
-          break;
-        case 2:
-          table2List.appendChild(listItem);
-          break;
-        case 3:
-          table3List.appendChild(listItem);
-          break;
-      }
+  function updateTotal() {
+    total = 0;
+    const rows = comandaTable.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+    Array.from(rows).forEach(row => {
+      const quantity = parseInt(row.querySelector(".quantity-input").value);
+      const price = parseFloat(row.getAttribute("data-price"));
+      const subtotal = quantity * price;
+      row.querySelector(".subtotal").textContent = `R$ ${subtotal.toFixed(2)}`;
+      total += subtotal;
     });
-  }
-  
-  // Função para abrir o modal de adição de produto
-  function openAddProductModal() {
-    const modal = document.getElementById('add-product-modal');
-    modal.style.display = 'block';
-  }
-  
-  // Função para fechar o modal de adição de produto
-  function closeAddProductModal() {
-    const modal = document.getElementById('add-product-modal');
-    modal.style.display = 'none';
-  }
-  
-  // Função para adicionar produto à mesa
-  function addProductToTable() {
-    const productNameInput = document.getElementById('product-name-input');
-    const selectedTable = document.getElementById('selected-table');
-    const tableId = selectedTable.value;
-    const product = productNameInput.value;
-  
-    // Atualize os dados no banco de dados com o produto adicionado à mesa correspondente
-    const tableData = mesasData.find((mesaData) => mesaData.mesa === parseInt(tableId));
-    tableData.produtos.push(product);
-  
-    // Atualize a lista de produtos na página
-    const tableList = document.getElementById(`table-${tableId}-list`);
-    const listItem = document.createElement('li');
-    listItem.textContent = product;
-    tableList.appendChild(listItem);
-  
-    // Feche o modal de adição de produto
-    closeAddProductModal();
-  }
-  
-  // Chamada inicial para exibir os dados das mesas na página
-  displayMesasData();
-  // Array para armazenar as mesas
-let tables = [1, 2, 3];
-
-// Função para adicionar uma nova mesa
-function addTable() {
-  const tableId = tables.length + 1;
-  tables.push(tableId);
-
-  const tablesContainer = document.querySelector('.tables-container');
-
-  const newTable = document.createElement('div');
-  newTable.classList.add('table');
-  newTable.innerHTML = `
-    <h2 class="table-title">Mesa ${tableId}</h2>
-    <ul class="table-list" id="table-${tableId}-list"></ul>
-  `;
-
-  tablesContainer.appendChild(newTable);
-}
-
-// Função para remover a última mesa
-function removeTable() {
-  if (tables.length === 0) {
-    return;
+    totalValue.textContent = `R$ ${total.toFixed(2)}`;
+    updateFinalTotal();
   }
 
-  const lastTableId = tables.pop();
+  function updateFinalTotal() {
+    const discountPercentage = parseFloat(discountInput.value);
+    const discountAmount = total * (discountPercentage / 100);
+    const finalTotal = total - discountAmount;
+    finalTotalValue.textContent = `R$ ${finalTotal.toFixed(2)}`;
+  }
 
-  const tableToRemove = document.querySelector(`#table-${lastTableId}-list`).parentNode;
-  tableToRemove.remove();
-}
+  Array.from(addButtons).forEach(button => {
+    button.addEventListener("click", () => {
+      const product = button.getAttribute("data-product");
+      const price = parseFloat(button.getAttribute("data-price"));
+      const quantity = parseInt(button.parentNode.querySelector(".quantity-input").value);
+      const subtotal = quantity * price;
 
-// Event listeners para os botões
-const addButton = document.querySelector('.add-button');
-addButton.addEventListener('click', addTable);
+      const row = document.createElement("tr");
+      row.setAttribute("data-price", price);
+      row.innerHTML = `
+        <td>${product}</td>
+        <td>${quantity}</td>
+        <td>R$ ${price.toFixed(2)}</td>
+        <td class="subtotal">R$ ${subtotal.toFixed(2)}</td>
+        <td><button class="remove-btn">Remover</button></td>
+      `;
+      comandaTable.getElementsByTagName("tbody")[0].appendChild(row);
 
-const removeButton = document.querySelector('.remove-button');
-removeButton.addEventListener('click', removeTable);
+      const removeButton = row.querySelector(".remove-btn");
+      removeButton.addEventListener("click", () => {
+        const subtotalToRemove = parseFloat(row.querySelector(".subtotal").textContent.substring(3));
+        total -= subtotalToRemove;
+        totalValue.textContent = `R$ ${total.toFixed(2)}`;
+        row.remove();
+        updateFinalTotal();
+      });
 
-  
+      updateTotal();
+    });
+  });
+
+  discountInput.addEventListener("input", () => {
+    updateFinalTotal();
+  });
+
+  applyDiscountBtn.addEventListener("click", () => {
+    updateFinalTotal();
+  });
+});
